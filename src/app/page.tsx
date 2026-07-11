@@ -295,7 +295,7 @@ export default function Home() {
             </motion.div>
             <h1 id="hero-main-heading"
               className="order-1 md:order-2 flex flex-col items-start md:items-end text-left md:text-right font-black uppercase text-black select-none"
-              style={{ fontSize: "clamp(2rem, 9vw, 9rem)", lineHeight: "0.86" }}
+              style={{ fontSize: "clamp(2rem, 8vw, 8.5rem)", lineHeight: "0.86" }}
             >
               {headingWords.map((word, i) => (
                 <div key={i} className="overflow-hidden">
@@ -382,46 +382,44 @@ export default function Home() {
             </span>
           </div>
 
-          {/* Card Container (Full-bleed, padding removed here) */}
-          <div className="relative z-10 flex-1 flex items-center overflow-y-auto md:overflow-visible">
+          {/* Card Container (Full-bleed, static background) */}
+          <div className="relative z-10 flex-1 flex items-center bg-[#5E0ED7] text-white py-12 md:py-20 px-5 sm:px-8 md:px-14 overflow-hidden">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeIdx}
-                initial={{ opacity: 0, y: 24 }}
+                initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -16 }}
-                transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.22, ease: "easeOut" }}
                 style={{ willChange: "transform, opacity" }}
-                className="w-full bg-[#5E0ED7] text-white py-12 md:py-20 px-5 sm:px-8 md:px-14"
+                className="w-full flex flex-col md:grid md:grid-cols-2 gap-6 md:gap-20 items-stretch md:items-center max-w-[1400px] mx-auto"
               >
-                <div className="flex flex-col md:grid md:grid-cols-2 gap-6 md:gap-20 items-stretch md:items-center max-w-[1400px] mx-auto">
-                  {/* Left (Title) */}
-                  <div className="flex flex-col gap-3 md:gap-6">
-                    <div className="flex items-center gap-4">
-                      <span className="text-[10px] font-bold tracking-widest uppercase text-white/60 font-mono">
-                        /{services[activeIdx].num}
-                      </span>
-                      <div className="h-px flex-1 bg-white/20" />
-                    </div>
-                    <h2 className="font-black uppercase text-white leading-none text-2xl sm:text-4xl md:text-5xl lg:text-6xl tracking-tight">
-                      {services[activeIdx].title}
-                    </h2>
+                {/* Left (Title) */}
+                <div className="flex flex-col gap-3 md:gap-6">
+                  <div className="flex items-center gap-4">
+                    <span className="text-[10px] font-bold tracking-widest uppercase text-white/60 font-mono">
+                      /{services[activeIdx].num}
+                    </span>
+                    <div className="h-px flex-1 bg-white/20" />
                   </div>
+                  <h2 className="font-black uppercase text-white leading-none text-2xl sm:text-4xl md:text-5xl lg:text-6xl tracking-tight">
+                    {services[activeIdx].title}
+                  </h2>
+                </div>
 
-                  {/* Right (Description & Tags) */}
-                  <div className="flex flex-col gap-4 md:gap-8">
-                    <p className="text-xs sm:text-sm md:text-base lg:text-lg font-medium text-white/90 leading-relaxed">
-                      {services[activeIdx].description}
-                    </p>
-                    <div className="flex flex-col gap-2 md:gap-3">
-                      <span className="text-[9px] font-bold tracking-widest uppercase text-white/50">Includes</span>
-                      <div className="flex flex-wrap gap-1.5 md:gap-2">
-                        {services[activeIdx].tags.map(tag => (
-                          <span key={tag} className="text-[9px] sm:text-xs font-bold tracking-wider uppercase bg-white/10 text-white px-3.5 py-1.5 rounded-full border border-white/20 hover:bg-white hover:text-[#5E0ED7] transition-colors">
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
+                {/* Right (Description & Tags) */}
+                <div className="flex flex-col gap-4 md:gap-8">
+                  <p className="text-xs sm:text-sm md:text-base lg:text-lg font-medium text-white/90 leading-relaxed">
+                    {services[activeIdx].description}
+                  </p>
+                  <div className="flex flex-col gap-2 md:gap-3">
+                    <span className="text-[9px] font-bold tracking-widest uppercase text-white/50">Includes</span>
+                    <div className="flex flex-wrap gap-1.5 md:gap-2">
+                      {services[activeIdx].tags.map(tag => (
+                        <span key={tag} className="text-[9px] sm:text-xs font-bold tracking-wider uppercase bg-white/10 text-white px-3.5 py-1.5 rounded-full border border-white/20 hover:bg-white hover:text-[#5E0ED7] transition-colors">
+                          {tag}
+                        </span>
+                      ))}
                     </div>
                   </div>
                 </div>
@@ -471,7 +469,7 @@ export default function Home() {
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 md:mb-20">
             <div className="flex flex-col gap-4">
               <span className="text-xs font-bold tracking-widest uppercase text-[#5E0ED7]">Transparent Pricing</span>
-              <h2 className="font-black tracking-tighter uppercase text-black leading-[0.85] text-5xl sm:text-7xl md:text-8xl lg:text-9xl">
+              <h2 className="font-black tracking-tighter uppercase text-black leading-[0.85] text-4xl sm:text-6xl md:text-7xl lg:text-8xl">
                 Build your<br />estimate.
               </h2>
             </div>
@@ -608,7 +606,7 @@ export default function Home() {
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 md:mb-20 px-5 sm:px-8 md:px-14">
             <div className="flex flex-col gap-4">
               <span className="text-xs font-bold tracking-widest uppercase text-[#5E0ED7]">How We Work</span>
-              <h2 className="font-black tracking-tighter uppercase text-white leading-[0.85] text-5xl sm:text-7xl md:text-8xl lg:text-9xl">
+              <h2 className="font-black tracking-tighter uppercase text-white leading-[0.85] text-4xl sm:text-6xl md:text-7xl lg:text-8xl">
                 The Perfectionists<br />process.
               </h2>
             </div>
@@ -627,37 +625,36 @@ export default function Home() {
             </span>
           </div>
 
-          {/* Card Viewer - Full bleed with purple background */}
-          <div className="relative z-10 flex items-center overflow-y-auto md:overflow-visible">
+          {/* Card Viewer - Full bleed with static purple background */}
+          <div className="relative z-10 flex items-center bg-[#5E0ED7] text-white w-full overflow-hidden">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeStepIdx}
-                initial={{ opacity: 0, y: 32 }}
+                initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -24 }}
-                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-                className="w-full bg-[#5E0ED7] text-white py-12 md:py-20 px-5 sm:px-8 md:px-14"
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.22, ease: "easeOut" }}
+                style={{ willChange: "transform, opacity" }}
+                className="w-full py-12 md:py-20 px-5 sm:px-8 md:px-14 flex flex-col md:grid md:grid-cols-2 gap-6 md:gap-20 items-stretch md:items-center max-w-[1400px] mx-auto"
               >
-                <div className="flex flex-col md:grid md:grid-cols-2 gap-6 md:gap-20 items-stretch md:items-center max-w-[1400px] mx-auto">
-                  {/* Left (Title) */}
-                  <div className="flex flex-col gap-3 md:gap-6">
-                    <div className="flex items-center gap-4">
-                      <span className="text-[10px] font-bold tracking-widest uppercase text-white/60 font-mono">
-                        /{processSteps[activeStepIdx].num}
-                      </span>
-                      <div className="h-px flex-1 bg-white/20" />
-                    </div>
-                    <h2 className="font-black uppercase text-white leading-none text-2xl sm:text-4xl md:text-5xl lg:text-6xl tracking-tight">
-                      {processSteps[activeStepIdx].title}
-                    </h2>
+                {/* Left (Title) */}
+                <div className="flex flex-col gap-3 md:gap-6">
+                  <div className="flex items-center gap-4">
+                    <span className="text-[10px] font-bold tracking-widest uppercase text-white/60 font-mono">
+                      /{processSteps[activeStepIdx].num}
+                    </span>
+                    <div className="h-px flex-1 bg-white/20" />
                   </div>
+                  <h2 className="font-black uppercase text-white leading-none text-2xl sm:text-4xl md:text-5xl lg:text-6xl tracking-tight">
+                    {processSteps[activeStepIdx].title}
+                  </h2>
+                </div>
 
-                  {/* Right (Description) */}
-                  <div className="flex flex-col gap-4 md:gap-8 justify-between h-full">
-                    <p className="text-xs sm:text-sm md:text-base lg:text-lg font-medium text-white/90 leading-relaxed">
-                      {processSteps[activeStepIdx].description}
-                    </p>
-                  </div>
+                {/* Right (Description) */}
+                <div className="flex flex-col gap-4 md:gap-8 justify-between h-full">
+                  <p className="text-xs sm:text-sm md:text-base lg:text-lg font-medium text-white/90 leading-relaxed">
+                    {processSteps[activeStepIdx].description}
+                  </p>
                 </div>
               </motion.div>
             </AnimatePresence>
@@ -695,7 +692,7 @@ export default function Home() {
         <div className="max-w-[1400px] mx-auto w-full flex flex-col md:flex-row md:items-end justify-between gap-14">
           <div className="flex flex-col gap-5">
             <span className="text-xs font-bold tracking-widest uppercase text-[#5E0ED7]">Get In Touch</span>
-            <h2 className="font-black tracking-tighter uppercase text-black leading-[0.85] text-5xl sm:text-7xl md:text-8xl lg:text-9xl">
+            <h2 className="font-black tracking-tighter uppercase text-black leading-[0.85] text-4xl sm:text-6xl md:text-7xl lg:text-8xl">
               Let&apos;s build<br />something<br /><span className="text-[#5E0ED7]">Perfect.</span>
             </h2>
             <p className="text-xs sm:text-sm font-semibold tracking-wider uppercase text-black/45 max-w-md leading-relaxed mt-2">
@@ -717,7 +714,7 @@ export default function Home() {
         </div>
 
         <div className="max-w-[1400px] mx-auto w-full flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-t-2 border-black/5 pt-8 text-[10px] sm:text-xs font-bold tracking-wider uppercase text-black/30">
-          <div>© {new Date().getFullYear()} Perfectionists Studio. All rights reserved.</div>
+          <div>© {new Date().getFullYear()} The Perfectionists. All rights reserved.</div>
           <div className="flex gap-6">
             {["Services","Pricing","Process","Contact"].map(l => (
               <a key={l} href={`#${l.toLowerCase()}`} className="hover:text-[#5E0ED7] transition-colors">{l}</a>
