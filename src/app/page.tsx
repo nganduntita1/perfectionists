@@ -74,9 +74,9 @@ const REGIONS = [
 ];
 
 const PRICING_SERVICES = [
-  { id: "strategy", label: "Brand Strategy & Consulting", minUSD: 2000,  maxUSD: 8000,  unit: "project" },
-  { id: "design",   label: "UI/UX Design",                minUSD: 3000,  maxUSD: 10000, unit: "project" },
-  { id: "web",      label: "Web Engineering",             minUSD: 5000,  maxUSD: 25000, unit: "project" },
+  { id: "strategy", label: "Brand Strategy & Consulting", minUSD: 1000,  maxUSD: 8000,  unit: "project" },
+  { id: "design",   label: "UI/UX Design",                minUSD: 1500,  maxUSD: 10000, unit: "project" },
+  { id: "web",      label: "Web Engineering",             minUSD: 2500,  maxUSD: 25000, unit: "project" },
   { id: "mobile",   label: "Mobile App Development",      minUSD: 8000,  maxUSD: 40000, unit: "project" },
   { id: "ai",       label: "AI Agents & Automation",      minUSD: 5000,  maxUSD: 30000, unit: "project" },
   { id: "social",   label: "Social Media Marketing",      minUSD: 1500,  maxUSD: 5000,  unit: "/ mo"    },
@@ -382,49 +382,51 @@ export default function Home() {
             </span>
           </div>
 
-          {/* Card Container (Full-bleed, static background) */}
-          <div className="relative z-10 flex-1 flex items-center bg-[#5E0ED7] text-white py-12 md:py-20 px-5 sm:px-8 md:px-14 overflow-hidden">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeIdx}
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -12 }}
-                transition={{ duration: 0.22, ease: "easeOut" }}
-                style={{ willChange: "transform, opacity" }}
-                className="w-full flex flex-col md:grid md:grid-cols-2 gap-6 md:gap-20 items-stretch md:items-center max-w-[1400px] mx-auto"
-              >
-                {/* Left (Title) */}
-                <div className="flex flex-col gap-3 md:gap-6">
-                  <div className="flex items-center gap-4">
-                    <span className="text-[10px] font-bold tracking-widest uppercase text-white/60 font-mono">
-                      /{services[activeIdx].num}
-                    </span>
-                    <div className="h-px flex-1 bg-white/20" />
+          {/* Card Container (Full-bleed, static background wrapper) */}
+          <div className="relative z-10 flex-1 flex items-center overflow-y-auto md:overflow-visible">
+            <div className="w-full bg-[#5E0ED7] text-white py-12 md:py-20 px-5 sm:px-8 md:px-14">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeIdx}
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -12 }}
+                  transition={{ duration: 0.22, ease: "easeOut" }}
+                  style={{ willChange: "transform, opacity" }}
+                  className="w-full flex flex-col md:grid md:grid-cols-2 gap-6 md:gap-20 items-stretch md:items-center max-w-[1400px] mx-auto"
+                >
+                  {/* Left (Title) */}
+                  <div className="flex flex-col gap-3 md:gap-6">
+                    <div className="flex items-center gap-4">
+                      <span className="text-[10px] font-bold tracking-widest uppercase text-white/60 font-mono">
+                        /{services[activeIdx].num}
+                      </span>
+                      <div className="h-px flex-1 bg-white/20" />
+                    </div>
+                    <h2 className="font-black uppercase text-white leading-none text-2xl sm:text-4xl md:text-5xl lg:text-6xl tracking-tight">
+                      {services[activeIdx].title}
+                    </h2>
                   </div>
-                  <h2 className="font-black uppercase text-white leading-none text-2xl sm:text-4xl md:text-5xl lg:text-6xl tracking-tight">
-                    {services[activeIdx].title}
-                  </h2>
-                </div>
 
-                {/* Right (Description & Tags) */}
-                <div className="flex flex-col gap-4 md:gap-8">
-                  <p className="text-xs sm:text-sm md:text-base lg:text-lg font-medium text-white/90 leading-relaxed">
-                    {services[activeIdx].description}
-                  </p>
-                  <div className="flex flex-col gap-2 md:gap-3">
-                    <span className="text-[9px] font-bold tracking-widest uppercase text-white/50">Includes</span>
-                    <div className="flex flex-wrap gap-1.5 md:gap-2">
-                      {services[activeIdx].tags.map(tag => (
-                        <span key={tag} className="text-[9px] sm:text-xs font-bold tracking-wider uppercase bg-white/10 text-white px-3.5 py-1.5 rounded-full border border-white/20 hover:bg-white hover:text-[#5E0ED7] transition-colors">
-                          {tag}
-                        </span>
-                      ))}
+                  {/* Right (Description & Tags) */}
+                  <div className="flex flex-col gap-4 md:gap-8">
+                    <p className="text-xs sm:text-sm md:text-base lg:text-lg font-medium text-white/90 leading-relaxed">
+                      {services[activeIdx].description}
+                    </p>
+                    <div className="flex flex-col gap-2 md:gap-3">
+                      <span className="text-[9px] font-bold tracking-widest uppercase text-white/50">Includes</span>
+                      <div className="flex flex-wrap gap-1.5 md:gap-2">
+                        {services[activeIdx].tags.map(tag => (
+                          <span key={tag} className="text-[9px] sm:text-xs font-bold tracking-wider uppercase bg-white/10 text-white px-3.5 py-1.5 rounded-full border border-white/20 hover:bg-white hover:text-[#5E0ED7] transition-colors">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   </div>
-                </div>
-              </motion.div>
-            </AnimatePresence>
+                </motion.div>
+              </AnimatePresence>
+            </div>
           </div>
 
           {/* Progress bar */}
@@ -625,39 +627,41 @@ export default function Home() {
             </span>
           </div>
 
-          {/* Card Viewer - Full bleed with static purple background */}
-          <div className="relative z-10 flex items-center bg-[#5E0ED7] text-white w-full overflow-hidden">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeStepIdx}
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -12 }}
-                transition={{ duration: 0.22, ease: "easeOut" }}
-                style={{ willChange: "transform, opacity" }}
-                className="w-full py-12 md:py-20 px-5 sm:px-8 md:px-14 flex flex-col md:grid md:grid-cols-2 gap-6 md:gap-20 items-stretch md:items-center max-w-[1400px] mx-auto"
-              >
-                {/* Left (Title) */}
-                <div className="flex flex-col gap-3 md:gap-6">
-                  <div className="flex items-center gap-4">
-                    <span className="text-[10px] font-bold tracking-widest uppercase text-white/60 font-mono">
-                      /{processSteps[activeStepIdx].num}
-                    </span>
-                    <div className="h-px flex-1 bg-white/20" />
+          {/* Card Viewer - Full bleed with static purple background wrapper */}
+          <div className="relative z-10 flex items-center w-full overflow-hidden">
+            <div className="w-full bg-[#5E0ED7] text-white py-12 md:py-20 px-5 sm:px-8 md:px-14">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeStepIdx}
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -12 }}
+                  transition={{ duration: 0.22, ease: "easeOut" }}
+                  style={{ willChange: "transform, opacity" }}
+                  className="w-full flex flex-col md:grid md:grid-cols-2 gap-6 md:gap-20 items-stretch md:items-center max-w-[1400px] mx-auto"
+                >
+                  {/* Left (Title) */}
+                  <div className="flex flex-col gap-3 md:gap-6">
+                    <div className="flex items-center gap-4">
+                      <span className="text-[10px] font-bold tracking-widest uppercase text-white/60 font-mono">
+                        /{processSteps[activeStepIdx].num}
+                      </span>
+                      <div className="h-px flex-1 bg-white/20" />
+                    </div>
+                    <h2 className="font-black uppercase text-white leading-none text-2xl sm:text-4xl md:text-5xl lg:text-6xl tracking-tight">
+                      {processSteps[activeStepIdx].title}
+                    </h2>
                   </div>
-                  <h2 className="font-black uppercase text-white leading-none text-2xl sm:text-4xl md:text-5xl lg:text-6xl tracking-tight">
-                    {processSteps[activeStepIdx].title}
-                  </h2>
-                </div>
 
-                {/* Right (Description) */}
-                <div className="flex flex-col gap-4 md:gap-8 justify-between h-full">
-                  <p className="text-xs sm:text-sm md:text-base lg:text-lg font-medium text-white/90 leading-relaxed">
-                    {processSteps[activeStepIdx].description}
-                  </p>
-                </div>
-              </motion.div>
-            </AnimatePresence>
+                  {/* Right (Description) */}
+                  <div className="flex flex-col gap-4 md:gap-8 justify-between h-full">
+                    <p className="text-xs sm:text-sm md:text-base lg:text-lg font-medium text-white/90 leading-relaxed">
+                      {processSteps[activeStepIdx].description}
+                    </p>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
           </div>
 
           {/* Stepper Navigation Buttons */}
