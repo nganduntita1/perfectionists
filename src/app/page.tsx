@@ -12,12 +12,15 @@ function Logo({ onClick, light = false }: { onClick?: () => void; light?: boolea
   const shouldRoll = isHovered || isAutoAnimating;
 
   useEffect(() => {
+    let timeout: NodeJS.Timeout;
     const interval = setInterval(() => {
       setIsAutoAnimating(true);
-      const timeout = setTimeout(() => setIsAutoAnimating(false), 950);
-      return () => clearTimeout(timeout);
+      timeout = setTimeout(() => setIsAutoAnimating(false), 950);
     }, 2800);
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+      if (timeout) clearTimeout(timeout);
+    };
   }, []);
 
   const base = light ? "text-white" : "text-black";
@@ -112,17 +115,14 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [helloIdx, setHelloIdx] = useState(0);
 
+  // Run the preloader loop for exactly 2.2s to introduce the greetings loop.
+  // Decoupled from document load listeners so that slow remote CDN videos cannot block user entry.
   useEffect(() => {
-    const handleLoad = () => {
-      setTimeout(() => setIsLoading(false), 2600);
-    };
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2200);
 
-    if (document.readyState === "complete") {
-      handleLoad();
-    } else {
-      window.addEventListener("load", handleLoad);
-      return () => window.removeEventListener("load", handleLoad);
-    }
+    return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
@@ -462,7 +462,7 @@ export default function Home() {
           <video
             className="absolute inset-0 w-full h-full object-cover scale-100"
             src="https://videotourl.com/videos/1783776564861-291c67fb-af00-4287-881e-f65bba81ca4d.mp4"
-            autoPlay loop muted playsInline
+            autoPlay loop muted playsInline preload="none"
           />
           <div className="absolute inset-0 bg-white/78" />
         </div>

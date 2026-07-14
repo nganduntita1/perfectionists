@@ -9,8 +9,21 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Perfectionists | Fearless Vision Delivered",
-  description: "Creative Studios Built Around Elevating Your Vision Into Striking Reality",
+  title: "Perfectionists | Digital Design & Engineering Agency",
+  description: "We design and engineer bespoke software, interfaces, and AI automation for ambitious brands. No templates. Zero compromise.",
+  openGraph: {
+    title: "Perfectionists | Digital Design & Engineering Agency",
+    description: "We design and engineer bespoke software, interfaces, and AI automation for ambitious brands. No templates. Zero compromise.",
+    url: "https://perfectionists.co.za",
+    siteName: "The Perfectionists",
+    locale: "en_ZA",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Perfectionists | Digital Design & Engineering Agency",
+    description: "We design and engineer bespoke software, interfaces, and AI automation for ambitious brands. No templates. Zero compromise.",
+  },
 };
 
 export default function RootLayout({
